@@ -1,0 +1,15 @@
+.new_user {
+  display: inline-block;
+  vertical-align: top;
+  margin: 80px 0 0 0 
+}
+
+.login {
+  display: inline-block;
+  margin: 80px 0 0 80px;
+  vertical-align: top;
+}
+
+.user_info{
+
+}

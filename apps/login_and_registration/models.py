@@ -2,6 +2,7 @@ from django.db import models
 import bcrypt
 import re
 
+
 class UserManager(models.Manager):
     def basic_validation(self, postData):
         errors = {}
@@ -54,10 +55,10 @@ class UserManager(models.Manager):
         return errors
 
 class User(models.Model):
-  first_name = models.CharField(max_length=50)
-  last_name = models.CharField(max_length=50)
-  email = models.CharField(max_length=50)
-  p_hash = models.CharField(max_length=90)
-  created_on = models.DateTimeField(auto_now_add=True)
-  updated_at = models.DateTimeField(auto_now=True)
-  objects = UserManager()
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    p_hash = models.CharField(max_length=90)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = UserManager()

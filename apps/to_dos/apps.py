@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class AccountibilityConfig(AppConfig):
-    name = 'accountibility'
+    name = 'to_dos'

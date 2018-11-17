@@ -8,5 +8,11 @@ class Message(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
+class Comment(models.Model): 
+    pass
 
-    
+class Group(models.Model):
+    name = models.CharField(max_length=100)
+    users_in_group = models.ManyToManyField(User, related_name="groups_user_is_in")
+
+

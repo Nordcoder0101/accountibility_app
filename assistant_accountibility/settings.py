@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jquery',
     'apps.messages',
     'apps.to_dos',
     'apps.login_and_registration',

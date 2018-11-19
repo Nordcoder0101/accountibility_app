@@ -68,11 +68,7 @@
   </div>
   <div>
     <h3>Daily's</h3>
-    {% if user.avatar == None %}
-    <img src="DEFAULT_IMAGE" />
-{% else %}
-    <img src="user.avatar"/>
-{% endif %}
+
     {% for d in all_agreements %}
       **Display Dailys**
     {% endfor %}

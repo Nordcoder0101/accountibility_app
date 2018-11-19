@@ -8,5 +8,5 @@ class Agreement(models.Model):
     is_monthly = models.BooleanField()
     is_longterm = models.BooleanField()
     is_completed = models.BooleanField()
-    due_date = models.DateTimeField()
+    due_date = models.DateTimeField(null = True)
     created_by = models.ForeignKey(User, related_name="agreements")

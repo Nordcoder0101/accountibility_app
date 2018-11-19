@@ -1,0 +1,17 @@
+.full_line {
+  display: block;
+  
+}
+
+
+.type_of_agreement{
+  display: inline-block;
+}
+
+.add_agreement{
+  color: blue;
+}
+
+h3 {
+  display: inline-block;
+}

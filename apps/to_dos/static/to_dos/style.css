@@ -1,0 +1,14 @@
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(0,0,0,.5);
+    font-size: 15px;
+}
+.navbar-light .navbar-brand {
+    color: rgba(0,0,0,.9);
+    font-size: 25px;
+
+}
+.navbar {
+    position: relative;
+    min-height: 50px;
+    border: 1px solid transparent;
+}

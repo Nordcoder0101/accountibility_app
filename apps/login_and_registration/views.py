@@ -5,8 +5,11 @@ import bcrypt
 from apps.login_and_registration.helpers.helpers import generate_word
 
 def index(request):
-    request.session.clear()
-    return render(request, 'login_and_registration/index.html')
+    # request.session.clear()
+    return render(request, 'login_and_registration/exemple.html')
+
+def register(request):
+    return render(request, 'login_and_registration/register.html')
 
 def register_account(request):
     if request.method == "POST":
@@ -14,7 +17,7 @@ def register_account(request):
         if len(errors) > 0:
             for k, v in errors.items():
                 messages.error(request, v)
-            return redirect('/')
+            return redirect('/register')
         else:
             p_hash = bcrypt.hashpw(
                 request.POST['password'].encode(), bcrypt.gensalt())

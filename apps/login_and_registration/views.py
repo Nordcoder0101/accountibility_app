@@ -23,7 +23,7 @@ def register_account(request):
             request.session['logged_in_user_id'] = new_user.id
             random_word = generate_word()
             request.session['random_word'] = random_word
-            return redirect("/quotes?secure={}".format(random_word))
+            return redirect("/home?secure={}".format(random_word))
 
 def show_success(request):
     
@@ -41,6 +41,6 @@ def validate_and_login(request):
                 request.session['logged_in_user_id'] = logged_in_user.id
                 random_word = generate_word()
                 request.session['random_word'] = random_word
-                return redirect("/quotes?secure={}".format(random_word))
+                return redirect("/home?secure={}".format(random_word))
 
                     

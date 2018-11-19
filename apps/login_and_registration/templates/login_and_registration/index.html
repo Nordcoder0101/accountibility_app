@@ -5,6 +5,11 @@
   <title>Login And Registration</title>
     {% load static %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src = "{% static 'login_and_registration/l_and_r.js'%}"></script>
   <link rel="stylesheet" href="{% static 'login_and_registration/style.css' %}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -25,9 +30,10 @@
   {% endif %}
   </div>
 
-  <div class = "new_user">
-    <h2>Sign Up</h2>
+  <div class = "signup_modal">
+  
     <form class = "user_info" action="/register_account" method="POST">
+    <span class="close">&times;</span>
     {% csrf_token %}
       <p>First name: <input type="text" name="first_name" placeholder="First Name"></p>
       <p>Last name: <input type="text" name="last_name" placeholder="Last Name"></p>
@@ -43,7 +49,7 @@
   </header>
 
   <div class="login">
-  
+    
     <form action="/login" method="POST">
     {% csrf_token %}
       <p class="login_input">Email: <input type="text" name="email" placeholder="you@sample.com"></p>
@@ -52,7 +58,12 @@
     </form>  
   </div>  
 
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+   <div>
+        <img class = "zen" src=" {% static 'login_and_registration/media/guided-meditation.jpg' %}"  alt="mountain top">
+        <div class="carousel-caption">
+    </div>
+
+  {% comment %} <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -63,7 +74,7 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-        <img src=" {% static "login_and_registration/media/guided-meditation.jpg" %}"  alt="mountain top">
+        <img src=" {% static 'login_and_registration/media/guided-meditation.jpg' %}"  alt="mountain top">
         <div class="carousel-caption">
         </div>
     </div>
@@ -71,16 +82,12 @@
     <div class="item">
       <img src=" {% static "login_and_registration/media/mountain_top.jpeg" %}" alt="Meditation">
       <div class="carousel-caption">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
       </div>
     </div>
 
     <div class="item">
       <img src=" {% static "login_and_registration/media/teamwork.jpeg" %}" alt="Skydive">
       <div class="carousel-caption">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
       </div>
     </div>
   </div>
@@ -94,6 +101,6 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
+</div> {% endcomment %}
 </body>
 </html>

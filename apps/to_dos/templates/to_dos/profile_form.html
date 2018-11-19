@@ -9,7 +9,7 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-  <script src = "{% static 'to_dos/to_dos_jquery.js'%}"></script>
+  <script src = "{% static 'login_and_registration/l_and_r.js'%}"></script>
   <link rel="stylesheet" href="{% static 'to_dos/css/style.css' %}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -20,24 +20,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div>
-    {% if messages %}
-      <ul class="messages">
-      {% for message in messages %}
-          <li class="{{ message.tags }}">{{ message }}</li>
-      {% endfor %}
-      </ul>
-  {% endif %}
-  <header>
 
-  </header>
-
-  <div>
-    <h1> Fill out your profile </h1>
-  </div>
-  <div>
-    <h3> Agreements  </h3>
-
-  <p class="add_agreement">Add a new agreement...</p>
-  </div>  
-
+<form class = "agreements" action = "add_agreement" method="POST">
+{% csrf_token %}
+  <input class ="full_line" placeholder = "What you will do..." size="50" type="text" name="description">
+  <select name="frequency" class="length_of_agreement"> 
+    <option value = "daily">Daily</option> 
+    <option value = "weekly">Weekly</option> 
+    <option value = "monthly">Monthly</option>
+    <option class="long_term" value ="long_term">Long Term</option>
+  </select>
+  <input class = "add_agreement_button" type ="submit" value="Add Agreement">
+</form>

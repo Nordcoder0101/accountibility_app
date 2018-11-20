@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^', include('apps.login_and_registration.urls')),
     url(r'^home', include('apps.to_dos.urls')),
     url(r'^messages', include('apps.messages.urls')),
-] +static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+]
+

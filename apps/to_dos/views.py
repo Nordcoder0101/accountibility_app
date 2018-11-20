@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from .models import User
+from django.contrib import messages
 from apps.login_and_registration.models import User
 from apps.to_dos.models import Agreement
 from django.http import JsonResponse, HttpResponse
+
 
 
 def index(request):
@@ -21,6 +24,7 @@ def render_due_date(request):
 
 def view_profile(request):
     return render(request, 'to_dos/profile.html')
+
 
 def add_agreement(request):
     if request.method == "POST":
@@ -51,3 +55,4 @@ def delete_agreement(request, id):
     agreement_to_delete.delete()
 
     return redirect('/home')
+

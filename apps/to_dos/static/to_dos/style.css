@@ -23,7 +23,7 @@
     text-align: center;
 }
 .header_img button{
-    margin-top: 15%;
+    margin-top: 10%;
     font-size: 40px;
     padding: 20px;
     border-radius: 10px;
@@ -67,4 +67,14 @@ header nav {
 .header_img a:link, a:visited, a:hover{
     text-decoration: none;
     color: white;
+}
+.daily{
+    height: 10%;
+    background: rgb(105,5,23);
+    background: linear-gradient(0deg, rgba(105,5,23,1) 0%, rgba(213,75,85,1) 46%, rgba(212,75,71,1) 100%);
+    color:white;
+    text-align: center;
+    font-size: 40px;
+    font-family:sans-serif;
+    padding: 2%;
 }

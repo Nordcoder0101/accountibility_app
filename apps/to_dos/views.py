@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import User
 from django.contrib import messages
-from apps.login_and_registration.models import User
+import bcrypt
 from apps.to_dos.models import Agreement
 from django.http import JsonResponse, HttpResponse
 
@@ -23,7 +23,33 @@ def render_due_date(request):
     return render(request, 'to_dos/render_due_date.html')
 
 def view_profile(request):
-    return render(request, 'to_dos/profile.html')
+    context = {
+        'user':User.objects.get(id=request.session['logged_in_user_id'])
+    }
+    return render(request, 'to_dos/profile.html',context)
+
+def edit_profile(request):
+    context = {
+        'user':User.objects.get(id=request.session['logged_in_user_id'])
+    }
+    return render(request, 'to_dos/profile_edit.html',context)
+
+def profile_update(request):
+    user=User.objects.get(id=request.session['logged_in_user_id'])
+    if request.method == "POST":
+        errors = User.objects.basic_validation(request.POST)
+        if len(errors) > 0:
+            for k, v in errors.items():
+                messages.error(request, v)
+            return redirect('/home/profile_edit')
+        else:
+            p_hash = bcrypt.hashpw(
+                request.POST['password'].encode(), bcrypt.gensalt())
+            user.first_name = request.POST['first_name']
+            user.last_name = request.POST['last_name']
+            user.email = request.POST['email']
+            user.pw_hash = p_hash
+            return redirect('/home/profile_edit')
 
 
 def add_agreement(request):

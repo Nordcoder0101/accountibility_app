@@ -31,8 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'dajaxice',
-    'dajax',
+
     'apps.messages',
     'apps.to_dos',
     'apps.login_and_registration',

@@ -1,0 +1,13 @@
+
+
+<form class = "agreements" method="POST" action="/home/add_agreement">
+{% csrf_token %}
+  <input class ="full_line" placeholder = "What you will do..." size="50" type="text" name="description">
+  <select name="frequency" class="length_of_agreement"> 
+    <option value = "daily">Daily</option> 
+    <option value = "weekly">Weekly</option> 
+    <option value = "monthly">Monthly</option>
+    <option class="long_term" value ="long_term">Long Term</option>
+  </select>
+  <input class = "add_agreement_button" type ="submit" value="Add Agreement">
+</form>

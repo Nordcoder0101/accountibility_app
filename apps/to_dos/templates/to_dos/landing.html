@@ -1,3 +1,10 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 <html>
 <head>
   <meta charset="utf-8" />
@@ -5,56 +12,149 @@
   <title>Login And Registration</title>
     {% load static %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.10/angular-material.min.js"></script>
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   <script src = "{% static 'login_and_registration/l_and_r.js'%}"></script>
+  <script src = "{% static 'to_dos/to_dos_jquery.js'%}"></script>
   <link rel="stylesheet" href="{% static 'to_dos/style.css' %}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div>
-    {% if messages %}
-      <ul class="messages">
-      {% for message in messages %}
-          <li class="{{ message.tags }}">{{ message }}</li>
-      {% endfor %}
-      </ul>
-  {% endif %}
-  </div>
+  <h3 class="greeting">Hello, {{request.session.first_name}} !</h3>
   <header>
-    <a>Build Profile</a>
-    <a>View Messages</a>
-    <a>View Groups</a>
-    <a>Logout</a>
+      <nav class="navbar navbar-expand-lg navbar-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="#"><i class="fas fa-home"></i> Home</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/home/profile"><i class="fas fa-user-cog"></i> Build Profile </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-comment-alt"></i> View Messages </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#"><i class="fas fa-users"></i> View Groups</a>
+              </li>
+            </ul>
+            <form action="/logout" class="form-inline my-2 my-lg-0">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out!</button>
+            </form>
+          </div>
+        </nav>
+        <div class="header_img">
+          <button type="button" class="btn btn-danger btn-lg"><a href="/home/profile">Add new Agreement</a></button>
+        </div>
   </header>
   <div>
-    <h2>Your Agreements</h2>
+    <!-- <h2>Your Agreements</h2>
   </div>
   <div>
-    <h3>Daily's</h3>
-    {% for d in all_agreements %}
-      **Display Dailys**
-    {% endfor %}
-    <h3>Weekly's</h3>
-    {% for d in all_agreements %}
-      **Display weeklys**
-    {% endfor %}
-    <h3>Monthly's</h3>
-    {% for d in all_agreements %}
-      **Display Monthlys**
-    {% endfor %}
-    <h3>Long Term<h3>
-    {% for d in all_agreements %}
-      **Display long terms**
-    {% endfor %}
-</body>
+    <h2>Daily</h2>
+        
+        <table class ="table table-bordered">
+          <tr>
+            <th>Description</th>
+            <th>Completed/Due Date</th>
+            <th>Actions</th>
+          </tr> -->
+
+        {% for d in all_agreements %}
+          {% if d.frequency_of_agreement == "daily" %}
+            <h3 class="daily">Daily</h3>
+          <div class="daily_task">
+            <h3>{{d.description}}</h3>
+            <p class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></p>
+            <a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
+          </div>
+          {% endif %}
+          {% if d.frequency_of_agreement == "weekly" %}
+          <h3 class="daily">Weekly</h3>
+          <div class="weekly_task">
+            <h3>{{d.description}}</h3>
+            <p class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></p>
+            <a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
+          {% endif %}
+        {% endfor %}
+  
+   <!-- <h2>Weekly</h2>
+        
+        <table class ="table table-bordered">
+          <tr>
+            <th>Description</th>
+            <th>Completed/Due Date</th>
+            <th>Actions</th>
+          </tr>
+          {% for d in all_agreements %}
+          {% if d.frequency_of_agreement == "weekly" %}
+          <tr>
+            <td>{{d.description}}</td>
+            <td class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></td>
+            <td><a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
+          </tr>
+          {% endif %}
+        {% endfor %}
+        </table>
+
+       <h2>Monthly</h2>
+        
+        <table class ="table table-bordered">
+          <tr>
+            <th>Description</th>
+            <th>Completed/Due Date</th>
+            <th>Actions</th>
+          </tr>
+          {% for d in all_agreements %}
+          {% if d.frequency_of_agreement == "monthly" %}
+          <tr>
+            <td>{{d.description}}</td>
+            <td class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></td>
+            <td><a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
+          </tr>
+          {% endif %}
+        {% endfor %}
+        </table>
+           <h2>Long Term</h2>
+        
+        <table class ="table table-bordered">
+          <tr>
+            <th>Description</th>
+            <th>Completed/Due Date</th>
+            <th>Actions</th>
+          </tr>
+          {% for d in all_agreements %}
+          {% if d.frequency_of_agreement == "long_term" %}
+          <tr>
+            <td>{{d.description}}</td>
+            <td class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></td>
+            <td><a class ="edit_modal_trigger"> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
+          </tr>
+          {% endif %}
+        {% endfor %}
+        </table>
+        <div class="edit_modal">
+          <div class="modal_content">
+            <span class="close_button">&times;</span>
+            <h1>Hi I am a modal</h1>
+          </div>    
+        </div> -->
+    </body>
+
 </html>
 

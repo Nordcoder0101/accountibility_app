@@ -1,5 +1,9 @@
 $(document).ready(function(){
   
+  $(".edit_modal_trigger").click(function(){
+    $(".edit_modal").toggleClass("show_modal")
+  })
+
   $(".add_agreement").on('click', function(){
     $.ajax({
       url: "/home/render_agreement",
@@ -10,18 +14,36 @@ $(document).ready(function(){
   })
 
   $(document).on('change', ".length_of_agreement", function(){
+      this_form = this
       if ($(this).val() == "long_term"){
-        $(this).before('<p>Due Date<input name="due_date" class="full_line due_date" type="date" name="due_date"</p>')
-    } 
-      if ($(this).val() != "long_term" && ($(this).prev().attr("class", "due_date"))){
+            $.ajax({
+              url: "/home/render_due_date",
+              method: "POST"
+            }).done(function (res) {
+              $(this_form).before(res)
+            })
+          } 
+      if ($(this).val() != "long_term" && ($(this).prev().attr("class", "due_date"))) {
         $(this).prev().remove()
-      }
-  })
+    }
+    }) 
   
-  // $(document).on('click', '.add_agreement_button', function(e){
-  //   e.preventdefault()
-  //   if ($(this).prev().val().length > 10){
-  //     $(this).prev().prev().remove()
-  //   }
-  // })
+    $(document).on('submit', ".agreements", function(e) {
+      this_form = this;
+      console.log(this)
+      var data = $(this).serialize()
+      // e.preventDefault();
+      $.ajax({
+        method: "POST",
+        url: "/home/add_agreement",
+        data: data
+      })
+      .done(function(res){
+          $(this).remove()
+        }
+      )
+      return false;
+    })
+
+  
 })

@@ -12,3 +12,65 @@
     min-height: 50px;
     border: 1px solid transparent;
 }
+
+#completed{
+    margin: 0 auto;
+}
+
+
+.click_to_complete {
+    margin: 0 0 0 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+}
+
+input[type = checkbox] {
+  display: none;
+}
+
+input + label {
+  font-size: 1.2rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: .1rem solid var(--blue);
+  border-radius: 50%;
+  background: var(--darkblue);
+  transition: .1s all;
+  cursor: pointer;
+  z-index: 999 !important;
+}
+
+input + label:hover {
+  transform: scale(.95);
+}
+
+input + label:after {
+  content: "🤜";
+}
+
+input:checked + label {
+  background: var(--blue);
+  transform: scale(1.1);
+}
+
+input:checked + label:hover {
+  background: var(--blue);
+  transform: scale(1.05);
+}
+
+input:checked + label:after {
+  content: "👍";
+}
+
+h2 {
+  text-align: center;
+}
+

@@ -20,5 +20,5 @@ urlpatterns = [
     url(r'^', include('apps.login_and_registration.urls')),
     url(r'^home', include('apps.to_dos.urls')),
     url(r'^messages', include('apps.messages.urls')),
-    url('avatar/', include('avatar.urls')),
+    # url('avatar/', include('avatar.urls')),
 ]

@@ -68,3 +68,12 @@ header nav {
     text-decoration: none;
     color: white;
 }
+
+.container{
+  display: inline-block;
+}
+
+.completed_due_date{
+  width: 120px;
+  color: red;
+}

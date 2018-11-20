@@ -28,15 +28,17 @@
       {% endfor %}
       </ul>
   {% endif %}
-  <header>
-
-  </header>
-
-  <div>
-    <h1> Fill out your profile </h1>
-  </div>
-
-  <form action = "submit_profile" method="POST">
-
-    <a class="add_daily">Add a new daily...</a>
+      </div>
+      <div>
+          <form action="/home/image" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>
+                <input id="id_image" type="file" class="" name="image">
+            </p>
+            <input type="submit" value="Submit" />
+        </form>
+      </div>
+</body>
+</html>
+  
     

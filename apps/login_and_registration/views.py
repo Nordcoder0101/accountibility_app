@@ -24,6 +24,7 @@ def register_account(request):
             print(p_hash)
             new_user = User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], p_hash=p_hash)
             request.session['logged_in_user_id'] = new_user.id
+            request.session['first_name'] = new_user.first_name
             random_word = generate_word()
             request.session['random_word'] = random_word
             return redirect("/home?secure={}".format(random_word))
@@ -42,8 +43,14 @@ def validate_and_login(request):
             else:
                 logged_in_user = User.objects.get(email=request.POST['email'])
                 request.session['logged_in_user_id'] = logged_in_user.id
+                request.session['first_name'] = logged_in_user.first_name
                 random_word = generate_word()
                 request.session['random_word'] = random_word
                 return redirect("/home?secure={}".format(random_word))
 
-                    
+def logout(request):
+    del request.session['first_name']
+    del request.session['logged_in_user_id']
+    del request.session['random_word']
+    return redirect('/')
+

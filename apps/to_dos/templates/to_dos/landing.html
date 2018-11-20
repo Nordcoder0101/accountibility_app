@@ -1,6 +1,9 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <html>
 <head>
@@ -29,15 +32,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- <div>
-    {% if messages %}
-      <ul class="messages">
-      {% for message in messages %}
-          <li class="{{ message.tags }}">{{ message }}</li>
-      {% endfor %}
-      </ul>
-  {% endif %}
-  </div> -->
+  <h3 class="greeting">Hello, {{request.session.first_name}} !</h3>
   <header>
       <nav class="navbar navbar-expand-lg navbar-light">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +42,7 @@
             <a class="navbar-brand" href="#"><i class="fas fa-home"></i> Home</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-user-cog"></i> Build Profile </a>
+                <a class="nav-link" href="/home/profile"><i class="fas fa-user-cog"></i> Build Profile </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fas fa-comment-alt"></i> View Messages </a>
@@ -56,34 +51,25 @@
                 <a class="nav-link " href="#"><i class="fas fa-users"></i> View Groups</a>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <form action="/logout" class="form-inline my-2 my-lg-0">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log out!</button>
             </form>
           </div>
         </nav>
-        <img src="{% static 'to_dos/header.png'%}" width="100%">
+        <div class="header_img">
+          <button type="button" class="btn btn-danger btn-lg"><a href="/home/profile">Add new Agreement</a></button>
+        </div>
   </header>
-  <div>
-    <h2>Your Agreements</h2>
-  </div>
-  <div>
-    <h3>Daily's</h3>
+  
 
-    {% for d in all_agreements %}
-      **Display Dailys**
-    {% endfor %}
-    <h3>Weekly's</h3>
-    {% for d in all_agreements %}
-      **Display weeklys**
-    {% endfor %}
-    <h3>Monthly's</h3>
-    {% for d in all_agreements %}
-      **Display Monthlys**
-    {% endfor %}
-    <h3>Long Term<h3>
-    {% for d in all_agreements %}
-      **Display long terms**
-    {% endfor %}
+  <!-- <div class="tasks">
+  <div class="remaining_tasks">
+    <h3>Remaining Tasks:</h3>
+  </div>
+  <div class="completed_tasks">
+    <h3>Completed Tasks:</h3>
+    </div> -->
+  </div>
 </body>
 </html>
 

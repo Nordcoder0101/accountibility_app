@@ -27,7 +27,7 @@ def register_account(request):
             request.session['first_name'] = new_user.first_name
             random_word = generate_word()
             request.session['random_word'] = random_word
-            return redirect("/home?secure={}".format(random_word))
+            return redirect('/home')
 
 def show_success(request):
     

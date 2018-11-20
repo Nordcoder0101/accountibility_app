@@ -63,7 +63,7 @@
         </div>
   </header>
   <div>
-    <h2>Your Agreements</h2>
+    <!-- <h2>Your Agreements</h2>
   </div>
   <div>
     <h2>Daily</h2>
@@ -73,20 +73,27 @@
             <th>Description</th>
             <th>Completed/Due Date</th>
             <th>Actions</th>
-          </tr>
+          </tr> -->
 
         {% for d in all_agreements %}
           {% if d.frequency_of_agreement == "daily" %}
-          <tr>
-            <td>{{d.description}}</td>
-            <td class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></td>
-            <td><a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
-          </tr>
+            <h3 class="daily">Daily</h3>
+          <div class="daily_task">
+            <h3>{{d.description}}</h3>
+            <p class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></p>
+            <a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
+          </div>
+          {% endif %}
+          {% if d.frequency_of_agreement == "weekly" %}
+          <h3 class="daily">Weekly</h3>
+          <div class="weekly_task">
+            <h3>{{d.description}}</h3>
+            <p class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></p>
+            <a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
           {% endif %}
         {% endfor %}
-        </table>
   
-   <h2>Weekly</h2>
+   <!-- <h2>Weekly</h2>
         
         <table class ="table table-bordered">
           <tr>

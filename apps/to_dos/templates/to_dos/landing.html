@@ -87,9 +87,9 @@
                           <th>Actions</th>
                         </tr>
                         <tr>
-                            <td id="day">{{d.description}}</td>
-                            <td class="container"><input class="checkbox1 checkboxs day-check" type="checkbox"><label for="checkbox"></label></td>
-                            <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a href="/home/delete/{{d.id}}" class="btn btn-info btn-lg"> Delete</a>
+                            <td class="description_{{d.id}}">{{d.description}}</td>
+                            <td class="container"><input data-id="{{d.id}}" class="checkboxs day-check" type="checkbox"><label for="checkbox"></label></td>
+                            <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn btn-info btn-lg"> Delete</a>
                           </tr>
                         </table>
               </div>
@@ -106,9 +106,9 @@
                     <th>Actions</th>
                   </tr>
                   <tr>
-                      <td>{{d.description}}</td>
-                      <td class="container"><input class="checkboxs week-check" type="checkbox"><label for="checkbox"></label></td>
-                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a href="/home/delete/{{d.id}}" class="btn btn-info btn-lg"> Delete</a>
+                      <td class="description_{{d.id}}">{{d.description}}</td>
+                      <td class="container"><input data-id="{{d.id}}" class="checkboxs week-check" type="checkbox"><label for="checkbox"></label></td>
+                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreementbtn btn-info btn-lg"> Delete</a>
                     </tr>
                   </table>
           </div>
@@ -125,9 +125,9 @@
                     <th>Actions</th>
                   </tr>
                   <tr>
-                      <td>{{d.description}}</td>
-                      <td class="container"><input class="checkboxs month-check" type="checkbox"><label for="checkbox"></label></td>
-                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a href="/home/delete/{{d.id}}" class="btn btn-info btn-lg"> Delete</a>
+                      <td class="description_{{d.id}}"> {{d.description}}</td>
+                      <td class="container"><input data-id="{{d.id}}" class="checkboxs month-check" type="checkbox"><label for="checkbox"></label></td>
+                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn-info btn-lg"> Delete</a>
                     </tr>
                   </table>
           </div>
@@ -144,9 +144,9 @@
                     <th>Actions</th>
                   </tr>
                   <tr>
-                      <td>{{d.description}}</td>
-                      <td class="container"><input class="checkboxs long-check" type="checkbox"><label for="checkbox"></label></td>
-                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a href="/home/delete/{{d.id}}" class="btn btn-info btn-lg"> Delete</a>
+                      <td class="description_{{d.id}}">{{d.description}}</td>
+                      <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox"><label class="description_{{d.id}}" for="checkbox">{{d.due_date}}</label></td>
+                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn btn-info btn-lg"> Delete</a>
                     </tr>
                   </table>
           </div>

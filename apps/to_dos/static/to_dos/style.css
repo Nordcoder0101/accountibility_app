@@ -96,12 +96,12 @@ header nav {
     font-size: 20px;
     color: grey;
     padding: 20px;
-    text-decoration: line-through;
+    border-top: 1px solid gray;
 }
 
 .container{
     display: inline-block;
-    width: 35%;
+    width: 20%;
     text-align: center;
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
@@ -122,4 +122,15 @@ header nav {
     color: rgb(233, 106, 106);
 }
 
-
+table td{
+    width: 30%;
+}
+.container{
+   padding: 20px;
+}
+table tbody{
+    width: 100%;
+}
+.row form{
+    height: 30%;
+}

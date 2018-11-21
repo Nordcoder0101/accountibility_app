@@ -78,3 +78,7 @@ header nav {
     font-family:sans-serif;
     padding: 2%;
 }
+
+.form_error{
+    color: rgb(233, 106, 106);
+}

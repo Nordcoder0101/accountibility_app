@@ -1,5 +1,11 @@
 $(document).ready(function(){
   
+  function addErrorAndFadeOut(target, error){
+    $(target).before(error)
+    $(".form_error").delay(800).fadeOut("slow")
+  }
+
+
   $(".edit_modal_trigger").click(function(){
     $(".edit_modal").toggleClass("show_modal")
   })
@@ -29,9 +35,8 @@ $(document).ready(function(){
     }
     }) 
   
-    $(document).on('submit', ".agreements", function(e) {
+    $(document).on('submit', ".agreements", function() {
       this_form = this;
-      console.log(this)
       var data = $(this).serialize()
       // e.preventDefault();
       $.ajax({
@@ -41,9 +46,18 @@ $(document).ready(function(){
       })
       .done(function(res){
         console.log(res)
+        var resDescription = `<p class = "form_error">${res.description}</p>`
+        var resDueDate = `<p class = "form_error">${res.due_date}</p>`
+        if(res.description){
+          addErrorAndFadeOut(this_form, resDescription) 
+        }
+        if (res.due_date) {
+          addErrorAndFadeOut(this_form, resDueDate)
+        }
+        if (res.success){
           $(this_form).remove()
         }
-      )
+        })
       return false;
     })
 

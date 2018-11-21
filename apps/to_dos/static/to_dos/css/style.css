@@ -11,3 +11,7 @@
 .add_agreement{
   color: blue;
 }
+
+.form_error{
+    color: rgb(214, 30, 30);
+}

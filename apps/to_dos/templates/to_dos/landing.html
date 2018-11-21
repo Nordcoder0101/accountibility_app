@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 <!-- Latest compiled and minified JavaScript -->
@@ -43,10 +43,62 @@
     $( ".long_term" ).click(function() {
      $( ".long_task" ).toggle( "slow" )});
     $(".checkbox1").click(function () {
-      $("#day").css("text-decoration", "line-through");})})
+      $("#day").css("text-decoration", "line-through");})
+    
+      $(document).on('click', '#edit',function (){
+        console.log('clicked')
+        $("#exampleModal").show();
+    });
+});
+                  
+  
 </script>
 </head>
+
+
 <body>
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalTitle">Edit Agreement</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="" method="POST">
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="col-md-8">
+                    <input id="textinput" name="description" type="text" class="input-group input-group-lg" placeholder="Description">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-8 control-label" for="selectbasic"></label>
+                    <div class="col-md-8">
+                        <select name="frequency" class="length_of_agreement input-group input-group-lg"> 
+                            <option value = "daily">Daily</option> 
+                            <option value = "weekly">Weekly</option> 
+                            <option value = "monthly">Monthly</option>
+                            <option class="long_term" value ="long_term">Long Term</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+              <br>
+              <br>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-warning btn-lg">Save changes</button>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </div>
+    
+
+    
   <h3 class="greeting">Hello, {{request.session.first_name}} !!!</h3>
   <header>
       <nav class="navbar navbar-expand-lg navbar-light">
@@ -82,6 +134,7 @@
               {% if d.frequency_of_agreement == "daily" %}
                 <div class="daily_task" style="display:none">
                     <table class ="table">
+
                       <tr>
                         <th>Description</th>
                         <th>Completed/Due Date</th>
@@ -112,6 +165,7 @@
                     <th>Actions</th>
                   </tr>
                   <tr>
+
                       {% if d.is_completed %}
                         <td style="text-decoration:line-through" class="description_{{d.id}}">{{d.description}}</td>
                         <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox" checked></td>
@@ -136,6 +190,7 @@
                     <th>Actions</th>
                   </tr>
                   <tr>
+
                        {% if d.is_completed %}
                         <td style="text-decoration:line-through" class="description_{{d.id}}">{{d.description}}</td>
                         <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox" checked><label style="text-decoration:line-through" class="description_{{d.id}}" for="checkbox">{{d.due_date}}</label></td>
@@ -144,6 +199,7 @@
                         <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox"><label  class="description_{{d.id}}" for="checkbox" >{{d.due_date}}</label></td>
                       {% endif %}
                       <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn-info btn-lg"> Delete</a>
+
                     </tr>
                   </table>
           </div>
@@ -160,6 +216,7 @@
                     <th>Actions</th>
                   </tr>
                   <tr>
+
                       
                       {% if d.is_completed %}
                         <td style="text-decoration:line-through" class="description_{{d.id}}">{{d.description}}</td>
@@ -169,17 +226,27 @@
                         <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox"><label  class="description_{{d.id}}" for="checkbox" >{{d.due_date}}</label></td>
                       {% endif %}
                       <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn btn-info btn-lg"> Delete</a>
+
                     </tr>
                   </table>
           </div>
           {% endif %}
         {% endfor %}
-    </body>
+        
+          <script>
+              $(document).ready(function(){
+                  $("#exampleModalCenter").on('show.bs.modal',function(){
+                      $("#edit").trigger('focus')
+                  });
+              });
+              </script>
+      </body>
     <footer>
       <div class="footer">
         <p>© 2018 Gandalf</p>
       </div>
     </footer>
+ 
 
 </html>
 

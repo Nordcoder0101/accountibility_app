@@ -1,4 +1,5 @@
 
+
 <form class = "agreements" method="POST" action="/home/add_agreement">
 {% csrf_token %}
   <input class ="full_line form-group" placeholder = "What you will do..." size="50" type="text" name="description">
@@ -9,6 +10,7 @@
     <option class="long_term" value ="long_term">Long Term</option>
   </select>
   <br>
-  <input class = "add_agreement_button" type ="submit" value="Add Agreement">
+  <input class = "add_agreement_button" type ="submit" value="Add">
+  <a class="remove"> Remove</a>
 </form>
 </html>

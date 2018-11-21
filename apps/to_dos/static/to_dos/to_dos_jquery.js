@@ -59,7 +59,7 @@ $(document).ready(function(){
         if (res.first_name){
           addErrorAndFadeOut(this_form, resfirst_name) 
         }
-        
+
         if(res.last_name){
           addErrorAndFadeOut(this_form, resLast_name)
         }
@@ -78,6 +78,10 @@ $(document).ready(function(){
       })
       return false;
     })  
+
+    $(document).on('click', ".remove", function () {
+      $(this).parent().remove()
+    })
 
     $(document).on('submit', ".agreements", function() {
       var this_form = this;

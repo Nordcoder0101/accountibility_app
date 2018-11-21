@@ -18,7 +18,7 @@
 }
 
 .header_img{
-    background: url("/static/to_dos/header.png") 100%;
+    background: url("/static/to_dos/header.png") 100% no-repeat;
     height: 50%;
     text-align: center;
 }
@@ -133,4 +133,10 @@ table tbody{
 }
 .row form{
     height: 30%;
+}
+.modal-content{
+    height: 25%;
+    width: 100%;
+    font-size: 20px;
+    
 }

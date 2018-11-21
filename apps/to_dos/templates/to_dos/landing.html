@@ -81,18 +81,23 @@
               {% if d.frequency_of_agreement == "daily" %}
                 <div class="daily_task" style="display:none">
                     <table class ="table">
-                        <tr>
-                          <th>Description</th>
-                          <th>Completed/Due Date</th>
-                          <th>Actions</th>
-                        </tr>
-                        <tr>
-                            <td class="description_{{d.id}}">{{d.description}}</td>
-                            <td class="container"><input data-id="{{d.id}}" class="checkboxs day-check" type="checkbox"><label for="checkbox"></label></td>
-                            <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn btn-info btn-lg"> Delete</a>
-                          </tr>
-                        </table>
-              </div>
+                      <tr>
+                        <th>Description</th>
+                        <th>Completed/Due Date</th>
+                        <th>Actions</th>
+                      </tr>
+                      <tr>
+                      {% if d.is_completed %}
+                        <td style="text-decoration:line-through" class="description_{{d.id}}">{{d.description}}</td>
+                        <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox" checked></td>
+                      {% else %}
+                        <td class="description_{{d.id}}">{{d.description}}</td>
+                        <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox"></td>
+                      {% endif %}
+                        <td><a  class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn btn-info btn-lg"> Delete</a>
+                      </tr>
+                    </table>
+                  </div>
               {% endif %}
             {% endfor %}
             <button class="daily week">Weekly</button>
@@ -106,9 +111,14 @@
                     <th>Actions</th>
                   </tr>
                   <tr>
-                      <td class="description_{{d.id}}">{{d.description}}</td>
-                      <td class="container"><input data-id="{{d.id}}" class="checkboxs week-check" type="checkbox"><label for="checkbox"></label></td>
-                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreementbtn btn-info btn-lg"> Delete</a>
+                      {% if d.is_completed %}
+                        <td style="text-decoration:line-through" class="description_{{d.id}}">{{d.description}}</td>
+                        <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox" checked></td>
+                      {% else %}
+                        <td class="description_{{d.id}}">{{d.description}}</td>
+                        <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox"></td>
+                      {% endif %}
+                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn btn-info btn-lg"> Delete</a>
                     </tr>
                   </table>
           </div>
@@ -125,8 +135,13 @@
                     <th>Actions</th>
                   </tr>
                   <tr>
-                      <td class="description_{{d.id}}"> {{d.description}}</td>
-                      <td class="container"><input data-id="{{d.id}}" class="checkboxs month-check" type="checkbox"><label for="checkbox"></label></td>
+                       {% if d.is_completed %}
+                        <td style="text-decoration:line-through" class="description_{{d.id}}">{{d.description}}</td>
+                        <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox" checked><label style="text-decoration:line-through" class="description_{{d.id}}" for="checkbox">{{d.due_date}}</label></td>
+                      {% else %}
+                        <td class="description_{{d.id}}">{{d.description}}</td>
+                        <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox"><label  class="description_{{d.id}}" for="checkbox" >{{d.due_date}}</label></td>
+                      {% endif %}
                       <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn-info btn-lg"> Delete</a>
                     </tr>
                   </table>
@@ -144,8 +159,14 @@
                     <th>Actions</th>
                   </tr>
                   <tr>
-                      <td class="description_{{d.id}}">{{d.description}}</td>
-                      <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox"><label class="description_{{d.id}}" for="checkbox">{{d.due_date}}</label></td>
+                      
+                      {% if d.is_completed %}
+                        <td style="text-decoration:line-through" class="description_{{d.id}}">{{d.description}}</td>
+                        <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox" checked><label style="text-decoration:line-through" class="description_{{d.id}}" for="checkbox">{{d.due_date}}</label></td>
+                      {% else %}
+                        <td class="description_{{d.id}}">{{d.description}}</td>
+                        <td class="container"><input data-id="{{d.id}}" class="checkboxs long-check" type="checkbox"><label  class="description_{{d.id}}" for="checkbox" >{{d.due_date}}</label></td>
+                      {% endif %}
                       <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a data-id="{{d.id}}" class="delete_agreement btn btn-info btn-lg"> Delete</a>
                     </tr>
                   </table>

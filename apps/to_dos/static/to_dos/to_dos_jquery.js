@@ -2,7 +2,12 @@ $(document).ready(function(){
   
   function addErrorAndFadeOut(target, error){
     $(target).before(error)
-    $(".form_error").delay(1200).fadeOut("slow")
+    $(".form_error").delay(2000).fadeOut("slow")
+  }
+
+  function addSuccessAndFadeOut(target, success) {
+    $(target).before(success)
+    $(".form_success").delay(2000).fadeOut("slow")
   }
 
 
@@ -35,6 +40,45 @@ $(document).ready(function(){
     }
     }) 
   
+    $(document).on('submit', "#edit_the_profile", function() {
+      var this_form = this;
+      var data = $(this).serialize()
+      console.log('clicked')
+      $.ajax({
+        method: "POST",
+        url: "/home/profile_update",
+        data: data
+      })
+      .done(function(res){
+        var resfirst_name = `<p class = "form_error">${res.first_name}</p>`
+        var resLast_name = `<p class = "form_error">${res.last_name}</p>`
+        var resEmail = `<p class = "form_error">${res.email}</p>`
+        var resEmailNotUnique = `<p class = "form_error">${res.email_not_unique}</p>`
+        var resSuccess = `<p class = "form_success">${res.success}</p>`
+        console.log(res)
+        if (res.first_name){
+          addErrorAndFadeOut(this_form, resfirst_name) 
+        }
+        
+        if(res.last_name){
+          addErrorAndFadeOut(this_form, resLast_name)
+        }
+
+        if(res.email){
+          addErrorAndFadeOut(this_form, resEmail)
+
+        }
+        if(res.email_not_unique){
+          addErrorAndFadeOut(this_form, resEmailNotUnique)
+        }
+
+        if(res.success){
+          addSuccessAndFadeOut(this_form, resSuccess)
+        }
+      })
+      return false;
+    })  
+
     $(document).on('submit', ".agreements", function() {
       var this_form = this;
       var data = $(this).serialize()
@@ -57,9 +101,10 @@ $(document).ready(function(){
         if (res.success){
           $(this_form).remove()
         }
-        })
+      })
       return false;
     })
+    
 
   $(document).on('click', '.delete_agreement', function(){
     var this_agreement = this;

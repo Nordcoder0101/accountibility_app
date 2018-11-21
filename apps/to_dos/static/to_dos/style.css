@@ -140,3 +140,10 @@ table tbody{
     font-size: 20px;
     
 }
+.navbar img{
+    width: 40%;
+    height: 25%;
+}
+.all{
+    background: linear-gradient(to right, rgba(251, 180, 67, 1) 0%, rgba(247, 153, 13, 1) 100%);
+}

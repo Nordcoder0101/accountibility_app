@@ -12,8 +12,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.10/angular-material.min.js"></script>
   <script src = "{% static 'to_dos/to_dos_jquery.js'%}"></script>
   <link rel="stylesheet" href="{% static 'to_dos/css/style.css' %}">
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+  <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
@@ -23,7 +24,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="all">
   <div>
     <a href="/home">Back</a>
     {% if messages %}
@@ -38,7 +39,7 @@
 
   </header>
   <div class="container">
-      <h3><span>  <a href="/home/profile_edit"> Profile Edit </a> <i class="fas fa-user-edit"></i></span></h3>
+      <h3><span>  <a href="/home/profile_edit"> Profile Edit </a> <img src="http://www.netanimations.net/thanksgiving_turkey_head_looking_around.gif"></span></h3>
     <div class="row">          
           <form class="form-horizontal" role="form">
             <div class="form-group">

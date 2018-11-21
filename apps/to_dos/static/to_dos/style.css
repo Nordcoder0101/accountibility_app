@@ -29,6 +29,9 @@
     border-radius: 10px;
     box-shadow: 5px 8px 10px 5px rgb(44, 44, 44);
 }
+.header_img button:hover{
+    color: white;
+}
 .remaining_tasks{
     display: inline-block;
     height: 15%;
@@ -62,23 +65,60 @@ header nav {
 }
 .greeting{
     padding: 10px;
-    font-family: monospace;
+    font-family: sans-serif;
 }
 .header_img a:link, a:visited, a:hover{
     text-decoration: none;
     color: white;
 }
-.daily{
+.daily {
     height: 10%;
-    background: rgb(105,5,23);
-    background: linear-gradient(0deg, rgba(105,5,23,1) 0%, rgba(213,75,85,1) 46%, rgba(212,75,71,1) 100%);
+    background:#f8883d;
+    width: 100%;
     color:white;
     text-align: center;
     font-size: 40px;
     font-family:sans-serif;
     padding: 2%;
+    border: none;
+    text-shadow: 5px 5px 5px rgb(49, 49, 49);
+}
+.daily:hover{
+    background-color: rgb(201, 200, 200);
+    color:#f8883d;
+    text-shadow: none;
+    border: none;
+}
+.footer{
+    height: 8%;
+    background-color: rgb(255, 253, 253);
+    text-align: center;
+    font-size: 20px;
+    color: grey;
+    padding: 20px;
+    text-decoration: line-through;
 }
 
+.container{
+    display: inline-block;
+    width: 35%;
+    text-align: center;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 25px;
+    text-align: center;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    font-size: 25px;
+}
+.checkboxs {
+   
+    height: 25px;
+    width: 25px;
+    text-align: center;
+  }
 .form_error{
     color: rgb(233, 106, 106);
 }
+

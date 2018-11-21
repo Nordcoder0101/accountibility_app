@@ -32,16 +32,29 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function(){
+    $( ".day" ).click(function() {
+      $( ".daily_task" ).toggle( "slow" )});
+    $( ".week" ).click(function() {
+      $( ".weekly_task" ).toggle( "slow" )});
+    $( ".month" ).click(function() {
+      $( ".monthly_task" ).toggle( "slow" )});
+    $( ".long_term" ).click(function() {
+     $( ".long_task" ).toggle( "slow" )});
+    $(".checkboxs").click(function () {
+     $(this).prev.prev.find("td").strike();})})
+</script>
 </head>
 <body>
-  <h3 class="greeting">Hello, {{request.session.first_name}} !</h3>
+  <h3 class="greeting">Hello, {{request.session.first_name}} !!!</h3>
   <header>
       <nav class="navbar navbar-expand-lg navbar-light">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#"><i class="fas fa-home"></i> Home</a>
+            <a class="navbar-brand" href="/home"><i class="fas fa-home"></i> Home</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item">
                 <a class="nav-link" href="/home/profile"><i class="fas fa-user-cog"></i> Build Profile </a>
@@ -63,93 +76,88 @@
         </div>
   </header>
   <div>
-    <!-- <h2>Your Agreements</h2>
-  </div>
-  <div>
-    <h2>Daily</h2>
-        
-        <table class ="table table-bordered">
-          <tr>
-            <th>Description</th>
-            <th>Completed/Due Date</th>
-            <th>Actions</th>
-          </tr> -->
-
+          <button class="daily day">Daily</button>
+            {% for d in all_agreements %}
+              {% if d.frequency_of_agreement == "daily" %}
+                <div class="daily_task" style="display:none">
+                    <table class ="table">
+                        <tr>
+                          <th>Description</th>
+                          <th>Completed/Due Date</th>
+                          <th>Actions</th>
+                        </tr>
+                        <tr>
+                            <td>{{d.description}}</td>
+                            <td class="container"><input class="checkboxs day-check" type="checkbox"><label for="checkbox"></label></td>
+                            <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a href="/home/delete/{{d.id}}" class="btn btn-info btn-lg"> Delete</a>
+                          </tr>
+                        </table>
+              </div>
+              {% endif %}
+            {% endfor %}
+            <button class="daily week">Weekly</button>
         {% for d in all_agreements %}
-          {% if d.frequency_of_agreement == "daily" %}
-            <h3 class="daily">Daily</h3>
-          <div class="daily_task">
-            <h3>{{d.description}}</h3>
-            <p class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></p>
-            <a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
+          {% if d.frequency_of_agreement == "weekly" %}
+          <div class="weekly_task" style="display:none">
+              <table class ="table">
+                  <tr>
+                    <th>Description</th>
+                    <th>Completed/Due Date</th>
+                    <th>Actions</th>
+                  </tr>
+                  <tr>
+                      <td>{{d.description}}</td>
+                      <td class="container"><input class="checkboxs week-check" type="checkbox"><label for="checkbox"></label></td>
+                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a href="/home/delete/{{d.id}}" class="btn btn-info btn-lg"> Delete</a>
+                    </tr>
+                  </table>
           </div>
           {% endif %}
-          {% if d.frequency_of_agreement == "weekly" %}
-          <h3 class="daily">Weekly</h3>
-          <div class="weekly_task">
-            <h3>{{d.description}}</h3>
-            <p class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></p>
-            <a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
-          {% endif %}
         {% endfor %}
-  
-   <!-- <h2>Weekly</h2>
-        
-        <table class ="table table-bordered">
-          <tr>
-            <th>Description</th>
-            <th>Completed/Due Date</th>
-            <th>Actions</th>
-          </tr>
-          {% for d in all_agreements %}
-          {% if d.frequency_of_agreement == "weekly" %}
-          <tr>
-            <td>{{d.description}}</td>
-            <td class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></td>
-            <td><a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
-          </tr>
-          {% endif %}
-        {% endfor %}
-        </table>
-
-       <h2>Monthly</h2>
-        
-        <table class ="table table-bordered">
-          <tr>
-            <th>Description</th>
-            <th class="completed_due_date">Completed/Due Date</th>
-            <th>Actions</th>
-          </tr>
-          {% for d in all_agreements %}
+        <button class="daily month">Monthly</button>
+        {% for d in all_agreements %}
           {% if d.frequency_of_agreement == "monthly" %}
-          <tr>
-            <td>{{d.description}}</td>
-            <td class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></td>
-            <td><a href=""> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
-          </tr>
+          <div class="monthly_task" style="display:none">
+              <table class ="table">
+                  <tr>
+                    <th>Description</th>
+                    <th>Completed/Due Date</th>
+                    <th>Actions</th>
+                  </tr>
+                  <tr>
+                      <td>{{d.description}}</td>
+                      <td class="container"><input class="checkboxs month-check" type="checkbox"><label for="checkbox"></label></td>
+                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a href="/home/delete/{{d.id}}" class="btn btn-info btn-lg"> Delete</a>
+                    </tr>
+                  </table>
+          </div>
           {% endif %}
         {% endfor %}
-        </table>
-           <h2>Long Term</h2>
-        
-        <table class ="table table-bordered">
-          <tr>
-            <th>Description</th>
-            <th>Completed/Due Date</th>
-            <th>Actions</th>
-          </tr>
-          {% for d in all_agreements %}
+        <button class="daily long_term">Long Term</button>
+        {% for d in all_agreements %}
           {% if d.frequency_of_agreement == "long_term" %}
-          <tr>
-            <td>{{d.description}}</td>
-            <td class="container"><input id="checkbox" type="checkbox"><label for="checkbox"></label></td>
-            <td><a class ="edit_modal_trigger"> Edit</a> | <a href="/home/delete/{{d.id}}"> Delete</a>
-          </tr>
+          <div class="long_task" style="display:none">
+              <table class ="table">
+                  <tr>
+                    <th>Description</th>
+                    <th>Completed/Due Date</th>
+                    <th>Actions</th>
+                  </tr>
+                  <tr>
+                      <td>{{d.description}}</td>
+                      <td class="container"><input class="checkboxs long-check" type="checkbox"><label for="checkbox"></label></td>
+                      <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a href="/home/delete/{{d.id}}" class="btn btn-info btn-lg"> Delete</a>
+                    </tr>
+                  </table>
+          </div>
           {% endif %}
         {% endfor %}
-        </table>
-
     </body>
+    <footer>
+      <div class="footer">
+        <p>© 2018 Gandalf</p>
+      </div>
+    </footer>
 
 </html>
 

@@ -30,8 +30,10 @@ def view_profile(request):
     return render(request, 'to_dos/profile.html',context)
 
 def edit_profile(request):
+    all_agreements_by_current_user = Agreement.objects.filter(created_by=request.session['logged_in_user_id'])
     context = {
         'user':User.objects.get(id=request.session['logged_in_user_id']),
+        'all_agreements': all_agreements_by_current_user
         
     }
     return render(request, 'to_dos/profile_edit.html',context)

@@ -42,8 +42,8 @@
       $( ".monthly_task" ).toggle( "slow" )});
     $( ".long_term" ).click(function() {
      $( ".long_task" ).toggle( "slow" )});
-    $(".checkboxs").click(function () {
-     $(this).prev.prev.find("td").strike();})})
+    $(".checkbox1").click(function () {
+      $("#day").css("text-decoration", "line-through");})})
 </script>
 </head>
 <body>
@@ -87,8 +87,8 @@
                           <th>Actions</th>
                         </tr>
                         <tr>
-                            <td>{{d.description}}</td>
-                            <td class="container"><input class="checkboxs day-check" type="checkbox"><label for="checkbox"></label></td>
+                            <td id="day">{{d.description}}</td>
+                            <td class="container"><input class="checkbox1 checkboxs day-check" type="checkbox"><label for="checkbox"></label></td>
                             <td><a href="/home/delete/{{d.id}}" class="btn btn-danger btn-lg"> Edit</a> <a href="/home/delete/{{d.id}}" class="btn btn-info btn-lg"> Delete</a>
                           </tr>
                         </table>

@@ -118,3 +118,7 @@ header nav {
     width: 25px;
     text-align: center;
   }
+.form_error{
+    color: rgb(233, 106, 106);
+}
+

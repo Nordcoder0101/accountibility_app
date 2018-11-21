@@ -24,13 +24,15 @@ def render_due_date(request):
 
 def view_profile(request):
     context = {
-        'user':User.objects.get(id=request.session['logged_in_user_id'])
+        'user':User.objects.get(id=request.session['logged_in_user_id']),
+        'agreements': Agreement.objects.all()
     }
     return render(request, 'to_dos/profile.html',context)
 
 def edit_profile(request):
     context = {
-        'user':User.objects.get(id=request.session['logged_in_user_id'])
+        'user':User.objects.get(id=request.session['logged_in_user_id']),
+        
     }
     return render(request, 'to_dos/profile_edit.html',context)
 
@@ -54,15 +56,25 @@ def profile_update(request):
 
 def add_agreement(request):
     if request.method == "POST":
-        print(request.POST)
+
+        
+        
         desc_of_agreement = request.POST['description']
         frequency_of_agreement = request.POST['frequency']
+        
         is_longterm = False
         due_date = None
         if frequency_of_agreement == "long_term":
             is_longterm = True
         if is_longterm == True:
             due_date = request.POST['due_date']
+        
+        errors = Agreement.objects.agreement_validation(request.POST)
+        response = {}
+        if len(errors) > 0:
+            for k, v in errors.items():
+                response[k] = v
+            return JsonResponse(response)
 
         current_user = User.objects.get(id=request.session['logged_in_user_id'])
 
@@ -70,7 +82,7 @@ def add_agreement(request):
             description=desc_of_agreement, frequency_of_agreement=frequency_of_agreement, is_longterm = is_longterm, due_date = due_date, created_by = current_user)
         print("NEW AGREEMENT CREATED")
 
-        return JsonResponse({'foo': "bar"})
+        return JsonResponse({'success': "yes"})
 
 def render_agreement(request):
     return render(request, 'to_dos/profile_form.html')

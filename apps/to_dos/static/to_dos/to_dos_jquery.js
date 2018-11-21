@@ -2,7 +2,7 @@ $(document).ready(function(){
   
   function addErrorAndFadeOut(target, error){
     $(target).before(error)
-    $(".form_error").delay(800).fadeOut("slow")
+    $(".form_error").delay(1200).fadeOut("slow")
   }
 
 
@@ -36,7 +36,7 @@ $(document).ready(function(){
     }) 
   
     $(document).on('submit', ".agreements", function() {
-      this_form = this;
+      var this_form = this;
       var data = $(this).serialize()
       // e.preventDefault();
       $.ajax({
@@ -61,5 +61,42 @@ $(document).ready(function(){
       return false;
     })
 
+  $(document).on('click', '.delete_agreement', function(){
+    var this_agreement = this;
+    var data = $(this).attr('data-id')
+    $.ajax({
+      method: "POST",
+      url: `/home/delete/${data}`,
+      data: data
+    }).done(function(res){
+      $(this_agreement).parent().parent().parent().parent().remove()
+    })
+  } )    
+
+  $(document).on('click', '.checkboxs', function(){
+    this_agreement = this;
+    var data = $(this).attr('data-id')
+    if($(this).prop("checked") == true){
+      console.log('checked')
+      $.ajax({
+        method: "POST",
+        url: `/home/is_complete/${data}`,
+        data: data
+      }).done(function(res){
+        $(`.description_${data}`).css('text-decoration', 'line-through')
+      })
+    }
+    if ($(this).prop("checked") != true) {
+      console.log('unchecked')
+      $.ajax({
+        method: "POST",
+        url: `home/is_not_complete/${data}`,
+        data: data
+      }).done(function (res) {
+        $(`.description_${data}`).css('text-decoration', 'none')
+        console.log(res)
+      })
+    }
+  })
   
 })

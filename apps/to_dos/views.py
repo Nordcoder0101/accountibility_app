@@ -4,6 +4,7 @@ from django.contrib import messages
 import bcrypt
 from apps.to_dos.models import Agreement
 from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -87,10 +88,31 @@ def add_agreement(request):
 def render_agreement(request):
     return render(request, 'to_dos/profile_form.html')
 
-
+@csrf_exempt
 def delete_agreement(request, id):
-    agreement_to_delete = Agreement.objects.get(id = id)
-    agreement_to_delete.delete()
+    if request.method == "POST":
+        agreement_to_delete = Agreement.objects.get(id = id)
+        agreement_to_delete.delete()
 
-    return redirect('/home')
+        return JsonResponse({"success": "yes"})
 
+@csrf_exempt
+def toggle_complete(request, id):
+    if request.method == "POST":
+        agreement_to_update = Agreement.objects.get(id=id)
+        agreement_to_update.is_complete = True
+        agreement_to_update.save()
+        print(agreement_to_update.is_complete)
+
+        return JsonResponse({'success': 'yes'})
+
+
+@csrf_exempt
+def toggle_not_complete(request, id):
+    if request.method == "POST":
+        agreement_to_update = Agreement.objects.get(id=id)
+        agreement_to_update.is_complete = False
+        agreement_to_update.save()
+        print(agreement_to_update.is_complete)
+
+        return JsonResponse({'success': 'yes'})

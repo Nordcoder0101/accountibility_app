@@ -1,13 +1,19 @@
 
 
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
 <form class = "agreements" method="POST" action="/home/add_agreement">
 {% csrf_token %}
-  <input class ="full_line" placeholder = "What you will do..." size="50" type="text" name="description">
-  <select name="frequency" class="length_of_agreement"> 
+  <input class ="full_line form-group" placeholder = "What you will do..." size="50" type="text" name="description">
+  <select name="frequency" class="length_of_agreement form-group"> 
     <option value = "daily">Daily</option> 
     <option value = "weekly">Weekly</option> 
     <option value = "monthly">Monthly</option>
     <option class="long_term" value ="long_term">Long Term</option>
   </select>
+  <br>
   <input class = "add_agreement_button" type ="submit" value="Add Agreement">
 </form>
+</html>

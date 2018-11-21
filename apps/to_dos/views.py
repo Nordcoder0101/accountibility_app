@@ -4,6 +4,7 @@ from django.contrib import messages
 import bcrypt
 from apps.to_dos.models import Agreement
 from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -24,45 +25,55 @@ def render_due_date(request):
 
 def view_profile(request):
     context = {
-        'user':User.objects.get(id=request.session['logged_in_user_id'])
+        'user':User.objects.get(id=request.session['logged_in_user_id']),
+        'agreements': Agreement.objects.all()
     }
     return render(request, 'to_dos/profile.html',context)
 
 def edit_profile(request):
+    
     context = {
-        'user':User.objects.get(id=request.session['logged_in_user_id'])
+        'user':User.objects.get(id=request.session['logged_in_user_id'])  
     }
     return render(request, 'to_dos/profile_edit.html',context)
 
 def profile_update(request):
     user=User.objects.get(id=request.session['logged_in_user_id'])
     if request.method == "POST":
-        errors = User.objects.basic_validation(request.POST)
+        errors = User.objects.edit_validation(request.POST)
+        response = {}
         if len(errors) > 0:
             for k, v in errors.items():
-                messages.error(request, v)
-            return redirect('/home/profile_edit')
+                response[k] = v
+            return JsonResponse(response)
         else:
-            p_hash = bcrypt.hashpw(
-                request.POST['password'].encode(), bcrypt.gensalt())
             user.first_name = request.POST['first_name']
             user.last_name = request.POST['last_name']
             user.email = request.POST['email']
-            user.pw_hash = p_hash
-            return redirect('/home/profile_edit')
+            return JsonResponse({'success': 'Profile successfully updated!'})
 
 
 def add_agreement(request):
     if request.method == "POST":
-        print(request.POST)
+
+        
+        
         desc_of_agreement = request.POST['description']
         frequency_of_agreement = request.POST['frequency']
+        
         is_longterm = False
         due_date = None
         if frequency_of_agreement == "long_term":
             is_longterm = True
         if is_longterm == True:
             due_date = request.POST['due_date']
+        
+        errors = Agreement.objects.agreement_validation(request.POST)
+        response = {}
+        if len(errors) > 0:
+            for k, v in errors.items():
+                response[k] = v
+            return JsonResponse(response)
 
         current_user = User.objects.get(id=request.session['logged_in_user_id'])
 
@@ -70,15 +81,39 @@ def add_agreement(request):
             description=desc_of_agreement, frequency_of_agreement=frequency_of_agreement, is_longterm = is_longterm, due_date = due_date, created_by = current_user)
         print("NEW AGREEMENT CREATED")
 
-        return JsonResponse({'foo': "bar"})
+        return JsonResponse({'success': "yes"})
 
 def render_agreement(request):
     return render(request, 'to_dos/profile_form.html')
 
-
+@csrf_exempt
 def delete_agreement(request, id):
-    agreement_to_delete = Agreement.objects.get(id = id)
-    agreement_to_delete.delete()
+    if request.method == "POST":
+        agreement_to_delete = Agreement.objects.get(id = id)
+        agreement_to_delete.delete()
 
-    return redirect('/home')
+        return JsonResponse({"success": "yes"})
 
+@csrf_exempt
+def toggle_complete(request, id):
+    if request.method == "POST":
+        agreement_to_update = Agreement.objects.get(id=id)
+        agreement_to_update.is_completed = True
+        agreement_to_update.save()
+        all_agreements = Agreement.objects.all()
+        # for a in all_agreements:
+        #     print(a.is_completed)
+        print(agreement_to_update.is_completed)
+
+        return JsonResponse({'success': 'yes'})
+
+
+@csrf_exempt
+def toggle_not_complete(request, id):
+    if request.method == "POST":
+        agreement_to_update = Agreement.objects.get(id=id)
+        agreement_to_update.is_completed = False
+        agreement_to_update.save()
+        print(agreement_to_update.is_completed)
+
+        return JsonResponse({'success': 'yes'})
